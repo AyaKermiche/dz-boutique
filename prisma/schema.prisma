@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model ShopSettings {
+  id            String @id @default("singleton")
+  shopName      String @default("DZ Boutique")
+  phone         String @default("")
+  whatsapp      String @default("")
+  instagram     String @default("")
+  address       String @default("")
+  deliveryPrice String @default("A confirmer")
+  logoUrl       String @default("")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  name      String?
+  phone     String?  @unique
+  orders    Order[]
+  reviews   Review[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  orderId   String   @unique
+  userId    String
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  order     Order    @relation(fields: [orderId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+  image    String?
+  products Product[]
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  description String?
+  price       Decimal     @db.Decimal(10, 2)
+  stock       Int         @default(0)
+  images      String[]
+  isActive    Boolean     @default(true)
+  categoryId  String
+  createdAt   DateTime    @default(now())
+  colors      String[]
+  sizes       String[]
+  orderItems  OrderItem[]
+  category    Category    @relation(fields: [categoryId], references: [id])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  userId       String?
+  status       OrderStatus @default(PENDING)
+  total        Decimal     @db.Decimal(10, 2)
+  fullName     String
+  phone        String
+  wilaya       String
+  commune      String
+  address      String
+  deliveryNote String?
+  createdAt    DateTime    @default(now())
+  user         User?       @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+  review       Review?
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Decimal @db.Decimal(10, 2)
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
