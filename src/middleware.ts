@@ -12,8 +12,10 @@ export default async function middleware(req: NextRequest) {
   if (isAdminRoute) {
     const session = await auth()
     if (!session || session.user?.role !== 'ADMIN') {
-      return NextResponse.redirect(new URL('/login', req.url))
-    }
+const locale = req.nextUrl.pathname.split('/')[1] 
+const safeLocale = routing.locales.includes(locale as any) ? locale : routing.defaultLocale
+
+return NextResponse.redirect(new URL(`/${safeLocale}/login`, req.url))    }
     return NextResponse.next()
   }
 
