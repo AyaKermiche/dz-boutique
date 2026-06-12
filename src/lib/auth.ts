@@ -4,8 +4,11 @@ import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
+
   session: { strategy: 'jwt' },
   pages: { signIn: '/login' },
+
   callbacks: {
     jwt({ token, user }) {
       if (user) {
@@ -20,6 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session
     },
   },
+
   providers: [
     Credentials({
       credentials: {

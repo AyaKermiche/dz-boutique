@@ -8,6 +8,7 @@ type Product = {
   price: any
   images: string[]
   stock: number
+  createdAt: Date
   category: { name: string }
 }
 

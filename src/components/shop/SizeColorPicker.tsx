@@ -198,7 +198,7 @@ export function SizeColorPicker({ sizes, colors, isSoldOut, product, whatsappNum
 
         {/* Direct order */}
         <button onClick={handleDirectOrder}
-          className="w-full py-4 text-sm tracking-widest uppercase border border-neutral-900 text-neutral-900 rounded-full hover:bg-neutral-900 hover:text-white transition">
+          className="w-full py-4 text-sm tracking-widest uppercase border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white transition">
           Commander maintenant
         </button>
 
