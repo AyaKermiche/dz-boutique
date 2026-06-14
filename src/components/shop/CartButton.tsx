@@ -33,8 +33,7 @@ export function CartButton() {
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
 
           {/* Panel */}
-          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white flex flex-col shadow-xl">
-            {/* Header */}
+<div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white z-[60] flex flex-col shadow-xl">            {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-100">
               <h2 className="font-display font-bold text-lg text-neutral-900">
                 Panier {itemCount > 0 && `(${itemCount})`}

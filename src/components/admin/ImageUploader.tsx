@@ -88,14 +88,13 @@ export function ImageUploader({ value, onChange, max = 5 }: Props) {
             </>
           )}
           <input
-            ref={inputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            className="hidden"
-            onChange={e => e.target.files && handleFiles(e.target.files)}
-            capture="environment"
-          />
+  ref={inputRef}
+  type="file"
+  accept="image/*"
+  multiple
+  className="hidden"
+  onChange={e => e.target.files && handleFiles(e.target.files)}
+/>
         </div>
       )}
     </div>

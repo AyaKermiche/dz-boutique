@@ -33,7 +33,8 @@ export default function ShopHeader({
 
   return (
     <>
-<header className="sticky top-0 z-40 border-b border-white/20 bg-white/50 backdrop-blur-2xl shadow-sm">        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <header className="sticky top-0 bg-white border-b border-neutral-100 z-40">
+        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
 
           {/* Left: hamburger mobile */}
           <button onClick={() => setMenuOpen(true)}
@@ -65,13 +66,7 @@ export default function ShopHeader({
           {/* Right icons */}
           <div className="flex items-center gap-3">
             {/* Search */}
-            {/*<button onClick={() => setSearchOpen(!searchOpen)}
-              className="text-neutral-500 hover:text-neutral-900 transition">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>*/}
+            <LocaleSwitcher />
 
             {/* Account */}
             {session ? (
@@ -86,9 +81,6 @@ export default function ShopHeader({
                 Connexion
               </Link>
             )}
-
-            <LocaleSwitcher />
-
 
             {/* Cart */}
             <CartButton />
